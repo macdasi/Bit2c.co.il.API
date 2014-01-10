@@ -7,6 +7,12 @@ using Newtonsoft.Json.Linq;
 
 namespace Bit2c.co.il.API.Client
 {
+    public class OrderBook
+    {
+        public List<List<decimal>> asks { get; set; }
+        public List<List<decimal>> bids { get; set; }
+    }
+
     public class TradeConfig 
     {
         public decimal FeeOnTrade { get; set; }

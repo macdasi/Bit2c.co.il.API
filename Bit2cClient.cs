@@ -94,7 +94,15 @@ namespace Bit2c.co.il.API.Client
             }
         }
 
-        
+        public OrderBook GetOrderBook(PairType Pair = PairType.BtcNis)
+        {
+            using (WebClient client = new WebClient())
+            {
+                string result = client.DownloadString(URL + "Exchanges/" + Pair.ToString() + "/orderbook.json");
+                OrderBook response = Deserialize<OrderBook>(result);
+                return response;
+            }
+        }
 
         public AddOrderResponse AddOrder(OrderData data)
         {
