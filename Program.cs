@@ -14,6 +14,7 @@ namespace Bit2c.co.il.API.Client
             string key = "5692036b-23b9-48c7-aedf-17db72e23a5b";
             string secret = "[your secret here]";
             Bit2cClient client = new Bit2cClient(url, key, secret);
+            var ticker = client.GetTicker(PairType.LtcBtc);
             var data = client.GetOrderBook(PairType.BtcNis);
             var data1 = client.Balance();
             var data2 = client.AddOrder(new OrderData { 

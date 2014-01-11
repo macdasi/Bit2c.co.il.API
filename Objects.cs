@@ -7,6 +7,30 @@ using Newtonsoft.Json.Linq;
 
 namespace Bit2c.co.il.API.Client
 {
+    public class Ticker
+    {
+        /// <summary>
+        /// high bid
+        /// </summary>
+        public decimal h { get; set; }
+        /// <summary>
+        /// low ask
+        /// </summary>
+        public decimal l { get; set; }
+        /// <summary>
+        /// trade last
+        /// </summary>
+        public decimal ll { get; set; }
+        /// <summary>
+        /// last 24 hours volume
+        /// </summary>
+        public decimal a { get; set; }
+        /// <summary>
+        /// last 24 hours average
+        /// </summary>
+        public decimal av { get; set; }
+    }
+
     public class OrderBook
     {
         public List<List<decimal>> asks { get; set; }
