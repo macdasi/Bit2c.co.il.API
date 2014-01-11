@@ -8,6 +8,10 @@ namespace Bit2c.co.il.API.Client
 {
     class Program
     {
+        /// <summary>
+        /// sample use of Bit2c.co.il calls with api client
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             string url = "http://localhost:53825/";

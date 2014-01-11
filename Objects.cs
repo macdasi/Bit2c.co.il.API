@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 
 namespace Bit2c.co.il.API.Client
 {
-
     public class ExchangesTrade
     {
         /// <summary>
@@ -60,18 +59,6 @@ namespace Bit2c.co.il.API.Client
         public List<List<decimal>> bids { get; set; }
     }
 
-    public class TradeConfig 
-    {
-        public decimal FeeOnTrade { get; set; }
-        public decimal PtoRisk { get; set; }
-        public int SecondsCheckOrders { get; set; }
-        public bool ExecuteBtceTrades { get; set; }
-        public string Key { get; set; }
-        public string Secret { get; set; }
-        public string Site { get; set; }
-        public int millisecondsSleep { get; set; }
-        public decimal perRisk { get; set; }
-    }
 
     public class UserBalance
     {
@@ -126,6 +113,13 @@ namespace Bit2c.co.il.API.Client
     public class AddOrderResponse
     {
         public OrderResponse OrderResponse { get; set; }
+        /// <summary>
+        /// New order response after:
+        /// 1.validation of engine 
+        /// 2.set status to order according to user balance(open/no funds) 
+        /// 3.added to orderbook 
+        /// 4.found a match for trade
+        /// </summary>
         public od NewOrder { get; set; }
     }
 
@@ -176,8 +170,14 @@ namespace Bit2c.co.il.API.Client
     public class OrderData
     {
         public decimal Amount { get; set; }
+        /// <summary>
+        /// price with 5 figures after point is valid, after that it is rounded
+        /// </summary>
         public decimal Price { get; set; }
         public decimal Total { get; set; }
+        /// <summary>
+        /// true for buy false for sell
+        /// </summary>
         public bool IsBid { get; set; }
         public PairType Pair { get; set; }
     }
@@ -206,11 +206,29 @@ namespace Bit2c.co.il.API.Client
 
     public class TradeOrder
     {
+        /// <summary>
+        /// amount
+        /// </summary>
         public decimal a { get; set; }
+        /// <summary>
+        /// date created utc
+        /// </summary>
         public DateTime d { get; set; }
+        /// <summary>
+        /// id
+        /// </summary>
         public long id { get; set; }
+        /// <summary>
+        /// price
+        /// </summary>
         public decimal p { get; set; }
+        /// <summary>
+        /// pair
+        /// </summary>
         public PairType pair { get; set; }
+        /// <summary>
+        /// true buy - false sell
+        /// </summary>
         public bool isBid { get; set; }
         public OrderStatusType s { get; set; }
     }
