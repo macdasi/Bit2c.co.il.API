@@ -10,3 +10,4 @@ C:\Users\macdasi\Documents\GitHub\Bit2c.co.il.API\obj\Debug\Bit2c.co.il.API.Clie
 C:\Users\macdasi\Documents\GitHub\Bit2c.co.il.API\obj\Debug\Bit2c.co.il.API.Client.pdb
 C:\Users\macdasi\Documents\GitHub\Bit2c.co.il.API\bin\Debug\Bit2c.co.il.API.Client.exe
 C:\Users\macdasi\Documents\GitHub\Bit2c.co.il.API\bin\Debug\Bit2c.co.il.API.Client.pdb
+C:\Users\macdasi\Documents\GitHub\Bit2c.co.il.API\obj\Debug\Bit2c.co.il.API.Client.csprojResolveAssemblyReference.cache

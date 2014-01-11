@@ -7,6 +7,29 @@ using Newtonsoft.Json.Linq;
 
 namespace Bit2c.co.il.API.Client
 {
+
+    public class ExchangesTrade
+    {
+        /// <summary>
+        /// date is the unixtimestamp of the trade
+        /// </summary>
+        public double date { get; set; }
+        /// <summary>
+        /// price is the price as in your markets currency (e.g. USD). 
+        /// Make sure it's not a float but a real decimal. You may add quotes if that makes things easier for you.
+        /// </summary>
+        public decimal price { get; set; }
+        /// <summary>
+        /// amount is the amount of bitcoins exchanged in that trade.
+        /// Don't use floats here either. You may add quotes, too.
+        /// </summary>
+        public decimal amount { get; set; }
+        /// <summary>
+        /// tid is a unique trade id (monotonically increasing integer) for each trade
+        /// </summary>
+        public long tid { get; set; }
+    }
+
     public class Ticker
     {
         /// <summary>

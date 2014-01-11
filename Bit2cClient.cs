@@ -94,6 +94,16 @@ namespace Bit2c.co.il.API.Client
             }
         }
 
+        public List<ExchangesTrade> GetTrades(PairType Pair = PairType.BtcNis, long since = 0, double date = 0)
+        {
+            using (WebClient client = new WebClient())
+            {
+                string result = client.DownloadString(URL + "Exchanges/" + Pair.ToString() + "/trades.json");
+                List<ExchangesTrade> response = Deserialize<List<ExchangesTrade>>(result);
+                return response;
+            }
+        }
+
         public Ticker GetTicker(PairType Pair = PairType.BtcNis)
         {
             using (WebClient client = new WebClient())
