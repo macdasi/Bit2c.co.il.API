@@ -249,4 +249,21 @@ namespace Bit2c.co.il.API.Client
             asks = new List<OrderData>();
         }
     }
+
+    //for merchants 
+    public class CheckoutLinkModel
+    {
+        public decimal Price { get; set; }
+        public string Description { get; set; }
+        public CoinType CoinType { get; set; }
+        public string ReturnURL { get; set; }
+        public string CancelURL { get; set; }
+        public bool NotifyByEmail { get; set; }
+    }
+
+    public class CheckoutResponse
+    {
+        public string error { get; set; }
+        public Guid id { get; set; }
+    }
 }

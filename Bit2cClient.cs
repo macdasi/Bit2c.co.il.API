@@ -31,29 +31,29 @@ namespace Bit2c.co.il.API.Client
 
     public class Bit2cClient : IExcangeClient
     {
-        public string Key;
-        public string secret;
+        private string Key;
+        private string secret;
         private UInt32 _nonce;
-        public string nonce
+        private string nonce
         {
             get
             {
                 return (_nonce++).ToString();
             }
         }
-        public string URL { get; set; }
-        public WebClient client { get; set; }
+        private string URL { get; set; }
+        private WebClient client { get; set; }
 
-        public string GetQueryString(object obj)
+        private string GetQueryString(object obj)
         {
             var properties = from p in obj.GetType().GetProperties()
                              where p.GetValue(obj, null) != null
-                             select p.Name + "=" + HttpUtility.UrlEncode(p.GetValue(obj, null).ToString());
+                             select p.Name + "=" + p.GetValue(obj, null).ToString();
 
             return String.Join("&", properties.ToArray());
         }
-        
-        public T Deserialize<T>(string json)
+
+        private T Deserialize<T>(string json)
         {
             T obj = Activator.CreateInstance<T>();
             MemoryStream ms = new MemoryStream(Encoding.Unicode.GetBytes(json));
@@ -239,6 +239,24 @@ namespace Bit2c.co.il.API.Client
             catch (Exception ex)
             {
                 
+                throw;
+            }
+        }
+
+        public CheckoutResponse CreateCheckout(CheckoutLinkModel data)
+        {
+            try
+            {
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                string qString = GetQueryString(data) + "&nonce=" + nonce;
+                var sign = ComputeHash(this.secret, qString);
+                var url = URL + "Merchant/CreateCheckout";
+                string result = Query(qString, url, Key, sign, "POST");
+                CheckoutResponse response = Deserialize<CheckoutResponse>(result);
+                return response;
+            }
+            catch (Exception ex)
+            {
                 throw;
             }
         }
