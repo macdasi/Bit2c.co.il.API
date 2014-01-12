@@ -16,8 +16,8 @@ namespace Bit2c.co.il.API.Client
         {
             string url = "http://localhost:53825/"; //For prod -  https://www.bit2c.co.il/
             // key & secret you can find in account settings
-            string key = "5692036b-23b9-48c7-aedf-17db72e23a5b";
-            string secret = "b4f51ab9854e3ae37d7fbba7b65dd18df6b4f9608d61bfec2c8584e89fc23a90";
+            string key = "5f5a6554-e4d9-405b-a638-394fca5521af";
+            string secret = "fac0edac8c9240712583239ee3a3661ba2304f44a7043de4fe27ce565ff7fc82";
             Bit2cClient client = new Bit2cClient(url, key, secret);
 
             //public calls no need for "secret" or Key
