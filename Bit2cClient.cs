@@ -133,7 +133,7 @@ namespace Bit2c.co.il.API.Client
         {
             try
             {
-                string qString = "nonce=" + nonce;
+                string qString = "pair=" + pair.ToString() + "&nonce=" + nonce;
                 var sign = ComputeHash(this.secret, qString);
                 var url = URL + "Order/MyOrders";
                 string result = Query(qString, url, Key, sign, "POST");
