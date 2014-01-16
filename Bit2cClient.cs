@@ -30,6 +30,13 @@ namespace Bit2c.co.il.API.Client
         private string URL { get; set; }
         private WebClient client { get; set; }
 
+        private static double ConvertToUnixTimestamp(DateTime date)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            TimeSpan diff = date - origin;
+            return Math.Floor(diff.TotalSeconds);
+        }
+
         private string GetQueryString(object obj)
         {
             var properties = from p in obj.GetType().GetProperties()
@@ -197,9 +204,17 @@ namespace Bit2c.co.il.API.Client
         {
             try
             {
-                string ft = fromTime.HasValue ? fromTime.Value.ToString("dd/MM/yyyy HH:mm:ss.fff") : null;
-                string tt = toTime.HasValue ? toTime.Value.ToString("dd/MM/yyyy HH:mm:ss.fff") : null;
-                string qString = string.Format("fromTime={0}&toTime={1}&nonce={2}",ft,tt,nonce);
+                double from = 0; double to = 0;
+                if (fromTime.HasValue)
+                {
+                    from = ConvertToUnixTimestamp(fromTime.Value);
+                }
+                if (toTime.HasValue)
+                {
+                    to = ConvertToUnixTimestamp(toTime.Value);
+                }
+
+                string qString = string.Format("fromTime={0}&toTime={1}&nonce={2}", from, to, nonce);
                 var sign = ComputeHash(this.secret, qString);
                 var url = URL + "Order/AccountHistory"; 
                 string result = Query(qString, url, Key, sign, "POST");
