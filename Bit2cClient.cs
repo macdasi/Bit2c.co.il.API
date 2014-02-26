@@ -244,6 +244,46 @@ namespace Bit2c.co.il.API.Client
             }
         }
 
+        public AddOrderResponse AddOrderMarketPriceBuy(OrderBuy data)
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(1000);
+                data.Total = decimal.Round(data.Total, 4);
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                string qString = GetQueryString(data) + "&nonce=" + nonce;
+                var sign = ComputeHash(this.secret, qString);
+                var url = URL + "Order/AddOrderMarketPriceBuy";
+                string result = Query(qString, url, Key, sign, "POST");
+                AddOrderResponse response = Deserialize<AddOrderResponse>(result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public AddOrderResponse AddOrderMarketPriceSell(OrderSell data)
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(1000);
+                data.Amount = decimal.Round(data.Amount, 4);
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                string qString = GetQueryString(data) + "&nonce=" + nonce;
+                var sign = ComputeHash(this.secret, qString);
+                var url = URL + "Order/AddOrderMarketPriceSell";
+                string result = Query(qString, url, Key, sign, "POST");
+                AddOrderResponse response = Deserialize<AddOrderResponse>(result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public CheckoutResponse CreateCheckout(CheckoutLinkModel data)
         {
             try

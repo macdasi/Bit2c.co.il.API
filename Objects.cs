@@ -266,4 +266,15 @@ namespace Bit2c.co.il.API.Client
         public string error { get; set; }
         public Guid id { get; set; }
     }
+
+    public class OrderSell
+    {
+        public decimal Amount { get; set; }
+        public PairType Pair { get; set; }
+    }
+    public class OrderBuy
+    {
+        public decimal Total { get; set; }
+        public PairType Pair { get; set; }
+    }
 }
