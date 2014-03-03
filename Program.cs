@@ -16,8 +16,8 @@ namespace Bit2c.co.il.API.Client
         {
             string url = "http://localhost:53825/"; //For prod -  https://www.bit2c.co.il/
             // key & secret you can find in account settings
-            string key = "5d913b46-0e6d-40b1-ba43-28dc47635cac";
-            string secret = "2c365d4de608111eed4cbfa023ed129a501f9b70b7f7e6f6f3439635834220c7";
+            string key = "f095a305-45f1-461c-b024-c0ede7af62dc";
+            string secret = "4989fe13e20a607cedb9caca33f9a233765829da5bcf4b7ffd85a9813b2f0794";
             Bit2cClient client = new Bit2cClient(url, key, secret);
 
             //public calls no need for "secret" or Key
@@ -26,6 +26,8 @@ namespace Bit2c.co.il.API.Client
             var data = client.GetOrderBook(PairType.BtcNis);
 
             var account = client.AccountHistory(new DateTime(2014, 1, 14), new DateTime(2014, 1, 16,14,00,00));
+
+            var addfundr = client.AddFund(new AskFund { IsDeposit = true, Reference = "12324", TotalInNIS = 2000 });
 
             //merchant create checkout button
             CheckoutLinkModel model = new CheckoutLinkModel

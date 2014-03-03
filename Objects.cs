@@ -110,6 +110,25 @@ namespace Bit2c.co.il.API.Client
         public int TypeId { get; set; }
     }
 
+    public class AskFundResponse
+    {
+        public string message { get; set; }
+        public string error { get; set; }
+    }
+
+    public class AskFund
+    {
+        public decimal TotalInNIS { get; set; }
+
+        public string Reference { get; set; }
+
+        public bool IsDeposit { get; set; }
+    }
+
+    public class AddCoinFundResponse {
+        public string address { get; set; }
+    }
+
     public class AddOrderResponse
     {
         public OrderResponse OrderResponse { get; set; }

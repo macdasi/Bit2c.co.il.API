@@ -244,6 +244,43 @@ namespace Bit2c.co.il.API.Client
             }
         }
 
+        public AskFundResponse AddFund(AskFund data)
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(1000);
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+                string qString = GetQueryString(data) + "&nonce=" + nonce;
+                var sign = ComputeHash(this.secret, qString);
+                var url = URL + "Order/AddFund";
+                string result = Query(qString, url, Key, sign, "POST");
+                AskFundResponse response = Deserialize<AskFundResponse>(result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public AddCoinFundResponse AddCoinFundsRequest(decimal total, CoinType Coin)
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(1000);
+                string qString = "total=" + total.ToString() + "&Coin=" + Coin.ToString() + "&nonce=" + nonce;
+                var sign = ComputeHash(this.secret, qString);
+                var url = URL + "Order/AddCoinFundsRequest";
+                string result = Query(qString, url, Key, sign, "POST");
+                AddCoinFundResponse response = Deserialize<AddCoinFundResponse>(result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public AddOrderResponse AddOrderMarketPriceBuy(OrderBuy data)
         {
             try
