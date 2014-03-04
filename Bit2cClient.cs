@@ -244,6 +244,40 @@ namespace Bit2c.co.il.API.Client
             }
         }
 
+        public Guid GetMyPaymentId()
+        {
+            try
+            {
+                string qString = string.Format("nonce={0}", nonce);
+                var sign = ComputeHash(this.secret, qString);
+                var url = URL + "Payment/GetMyId";
+                string result = Query(qString, url, Key, sign, "POST");
+                Guid response = Deserialize<Guid>(result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public SendPaymentResponse Send(Guid payTo, decimal Total, CoinType coin = CoinType.BTC)
+        {
+            try
+            {
+                string qString = string.Format("payTo={0}&Total={1}&coin={2}&nonce={3}", payTo, Total, coin, nonce);
+                var sign = ComputeHash(this.secret, qString);
+                var url = URL + "Payment/Send";
+                string result = Query(qString, url, Key, sign, "POST");
+                SendPaymentResponse response = Deserialize<SendPaymentResponse>(result);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public AskFundResponse AddFund(AskFund data)
         {
             try

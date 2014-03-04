@@ -25,6 +25,12 @@ namespace Bit2c.co.il.API.Client
             var ticker = client.GetTicker(PairType.LtcBtc);
             var data = client.GetOrderBook(PairType.BtcNis);
 
+            var _MyPaymentId = client.GetMyPaymentId();
+
+            //this should alert error can not send self payment
+            var sendresp = client.Send(_MyPaymentId, 1.4m, CoinType.BTC);
+            
+
             var account = client.AccountHistory(new DateTime(2014, 1, 14), new DateTime(2014, 1, 16,14,00,00));
 
             var addfundr = client.AddFund(new AskFund { IsDeposit = true, Reference = "12324", TotalInNIS = 2000 });
