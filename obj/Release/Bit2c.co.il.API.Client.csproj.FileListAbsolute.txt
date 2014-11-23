@@ -1,2 +1,0 @@
-C:\Users\macdasi\Documents\GitHub\Bit2c.co.il.API\bin\Release\Bit2c.co.il.API.Client.exe.config
-C:\Users\macdasi\Documents\GitHub\Bit2c.co.il.API\obj\Release\Bit2c.co.il.API.Client.csprojResolveAssemblyReference.cache
