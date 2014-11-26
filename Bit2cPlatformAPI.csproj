@@ -7,8 +7,8 @@
     <ProjectGuid>{AC9AF7C1-E868-437D-9595-A0875753E71F}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bit2c.co.il.API.Client</RootNamespace>
-    <AssemblyName>Bit2c.co.il.API.Client</AssemblyName>
+    <RootNamespace>Bit2cPlatform.Client</RootNamespace>
+    <AssemblyName>Bit2c Platform API Client</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Lib\Json50r8\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,11 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bit2cClient.cs" />
+    <Compile Include="Bit2c.cs" />
+    <Compile Include="ExchangeClient.cs" />
     <Compile Include="IExcangeClient.cs" />
     <Compile Include="Objects.cs" />
+    <Compile Include="PermissionException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VBTC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

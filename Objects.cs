@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
-namespace Bit2c.co.il.API.Client
+namespace Bit2cPlatform.Client
 {
     public class ExchangesTrade
     {
@@ -62,47 +64,20 @@ namespace Bit2c.co.il.API.Client
 
     public class UserBalance
     {
-        public decimal BalanceBTC { get; set; }
-        public decimal BalanceLTC { get; set; }
-        public decimal BalanceNIS { get; set; }
-    }
-
-    public enum AccountAction
-    {
-        SellBTC = 0,
-        BuyBTC = 1,
-        FeeBuyBTC = 2,
-        FeeSellBTC = 3,
-        DepositBTC = 4,
-        DepositNIS = 5,
-        WithdrawalBTC = 6,
-        WithdrawalNIS = 7,
-        FeeWithdrawalBTC = 8,
-        FeeWithdrawalNIS = 9,
-        Unknown = 10,
-        PayWithBTC = 11,
-        ReceivedPaymentBTC = 12,
-        FeeReceivedPaymentBTC = 13,
-        DepositLTC = 14,
-        WithdrawalLTC = 15,
-        FeeWithdrawalLTC = 16,
-        BuyLTCBTC = 17,
-        SellLTCBTC = 18,
-        BuyLTCNIS = 19,
-        SellLTCNIS = 20,
+        public Dictionary<string, decimal> Balance = new Dictionary<string, decimal>();
+        public decimal FeeMaker;
+        public decimal FeeTaker;
+        public decimal TradeVolume;
+        public decimal TotalTradeVolume;
     }
 
     public class AccountRaw
     {
-        public decimal BalanceBTC { get; set; }
-        public decimal BalanceLTC { get; set; }
-        public decimal BalanceNIS { get; set; }
-        public decimal? BTC { get; set; }
-        public decimal? LTC { get; set; }
-        public decimal? NIS { get; set; }
+        public Dictionary<string, decimal> Balance = new Dictionary<string, decimal>();
+        public Dictionary<string, decimal?> Changed = new Dictionary<string, decimal?>();
+        public Dictionary<string, decimal?> FeeIn = new Dictionary<string, decimal?>();
         public DateTime Created { get; set; }
         public decimal? Fee { get; set; }
-        public decimal? FeeInNIS { get; set; }
         public long id { get; set; }
         public DateTime? OrderCreated { get; set; }
         public decimal? PricePerCoin { get; set; }
@@ -124,6 +99,7 @@ namespace Bit2c.co.il.API.Client
 
     public class AskFund
     {
+        // TODO: Make generic
         public decimal TotalInNIS { get; set; }
 
         public string Reference { get; set; }
@@ -131,7 +107,8 @@ namespace Bit2c.co.il.API.Client
         public bool IsDeposit { get; set; }
     }
 
-    public class AddCoinFundResponse {
+    public class AddCoinFundResponse
+    {
         public string address { get; set; }
     }
 
@@ -153,6 +130,12 @@ namespace Bit2c.co.il.API.Client
         public bool HasError { get; set; }
         public string Error { get; set; }
     }
+
+    public class CancelOrderReponse
+    {
+        public OrderResponse OrderResponse;
+    }
+
     /// <summary>
     /// order details
     /// </summary>
@@ -215,18 +198,45 @@ namespace Bit2c.co.il.API.Client
         Wait = 3
     }
 
-    public enum PairType
+    public class PairType
     {
-        BtcNis = 0,
-        LtcBtc = 1,
-        LtcNis = 2
+        public PairType()
+        {
+        }
+
+        public PairType(string pairText)
+        {
+            if (pairText == null || pairText.Length != 6)
+                throw new ArgumentException("Invalid pair string", "pairText");
+            C1 = new CoinType(pairText.Substring(0, 3));
+            C2 = new CoinType(pairText.Substring(3, 3));
+        }
+
+        public CoinType C1;
+        public CoinType C2;
+        public override string ToString()
+        {
+            if (C1 == null || C2 == null || C1.ShortName == null || C2.ShortName == null)
+                return "<null PairType>";
+            return string.Format(
+                "{0}{1}",
+                CultureInfo.InvariantCulture.TextInfo.ToTitleCase(C1.ShortName.ToLower()),
+                CultureInfo.InvariantCulture.TextInfo.ToTitleCase(C2.ShortName.ToLower()));
+        }
     }
 
-    public enum CoinType
+    public class CoinType
     {
-        BTC = 0,
-        LTC = 1,
-        NIS = 2
+        public CoinType(string shortName)
+        {
+            ShortName = shortName;
+        }
+        public override string ToString()
+        {
+            return ShortName;
+        }
+        public readonly string ShortName;
+        public static readonly CoinType BTC = new CoinType("BTC");
     }
 
     public class TradeOrder
