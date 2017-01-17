@@ -100,7 +100,7 @@ namespace Bit2cPlatform.Client
     public class AskFund
     {
         // TODO: Make generic
-        public decimal TotalInNIS { get; set; }
+        public decimal Total { get; set; }
 
         public string Reference { get; set; }
 
