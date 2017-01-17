@@ -33,7 +33,7 @@ namespace Bit2cPlatform.Client
 
             var account = client.AccountHistory(new DateTime(2014, 1, 14), new DateTime(2014, 1, 16,14,00,00));
 
-            var addfundr = client.AddFund(new AskFund { IsDeposit = true, Reference = "12324", TotalInNIS = 2000 });
+            var addfundr = client.AddFund(new AskFund { IsDeposit = true, Reference = "12324", Total = 2000 });
 
             //merchant create checkout button
             CheckoutLinkModel model = new CheckoutLinkModel
